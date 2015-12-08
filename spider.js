@@ -2,9 +2,9 @@ var request = require('request');
 var cheerio = require('cheerio');
 var fs = require('fs');
 
-var mainUrl = 'http://mangaop.info/capitulos/'
+var MAIN_URL = 'http://mangaop.info/capitulos/'
 
-var imageUrl = 'http://mangas2014.centraldemangas.com.br/one_piece/one_piece'
+var IMAGE_URL = 'http://mangas2014.centraldemangas.com.br/one_piece/one_piece'
 
 var HEADER_ONE_PIECE = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:42.0) Gecko/20100101 \
@@ -34,18 +34,13 @@ function download_chapter (chapter) {
 
 	function callback(error, response, body) {
 		if (!error) {
-			var $ = cheerio.load(body);
-
-			var chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
-
-			var number_of_chapters = chapters[chapters.length - 1];
+			number_of_chapters = get_chapters(body);
 
 			console.log("Número de imagens: " + number_of_chapters);
 
 			for (var i = 1; i <= number_of_chapters; i++) {
 				download_image(chapter, i);
 			};
-
 		}
 	}
 
@@ -54,7 +49,15 @@ function download_chapter (chapter) {
 }
 
 function generate_mainUrl (chapter) {
-	return mainUrl + chapter + '#1'
+	return MAIN_URL + chapter + '#1'
+}
+
+function get_chapters (body) {
+	var $ = cheerio.load(body);
+
+	var chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
+
+	return chapters[chapters.length - 1];
 }
 
 function download_image (chapter, number) {
@@ -76,13 +79,13 @@ function download_image (chapter, number) {
 	function callback () {
 		console.log('Arquivo salvo ' + filename)
 	}
-}	
+}
 
 function generate_imageUrl (chapter, number) {
 	if (number < 10) {
 		number = '0' + number
 	}
-	return imageUrl + chapter + '-' + number + '.jpg' 
+	return IMAGE_URL + chapter + '-' + number + '.jpg' 
 }
 
 download_chapter('800');
