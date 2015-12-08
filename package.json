@@ -1,0 +1,12 @@
+{
+  "name": "jsmanga",
+  "version": "0.0.1",
+  "description": "grabbing a manga",
+  "main": "spider.js",
+  "repository": "",
+  "author": "",
+  "dependencies": {
+    "cheerio": "latest",
+    "request": "latest"
+  }
+}
