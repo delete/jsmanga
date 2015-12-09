@@ -33,7 +33,9 @@ function download_chapter (chapter) {
 		if (!error) {
 			number_of_chapters = get_chapters(body);
 
-			console.log("Número de imagens: " + number_of_chapters);
+			if(!number_of_chapters){ number_of_chapters = 0 }
+			
+			console.log("Número de páginas: " + number_of_chapters);
 
 			for (var i = 1; i <= number_of_chapters; i++) {
 				download_image(chapter, i);
