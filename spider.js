@@ -15,14 +15,11 @@ var HEADER_ONE_PIECE = {
     'Referer': 'http://mangaop.info/capitulos/747'
 }
 
-function create_folder(chapter) {
-	var dir = 'capitulo-' + chapter;
-
-	if (!fs.existsSync(dir)){
-	    fs.mkdirSync(dir);
-	}
-	return dir + '/'
+function main () {
+	var args = process.argv.slice(2);
+	download_chapter(args[0]);
 }
+
 
 function download_chapter (chapter) {
 
@@ -48,9 +45,11 @@ function download_chapter (chapter) {
 
 }
 
+
 function generate_mainUrl (chapter) {
 	return MAIN_URL + chapter + '#1'
 }
+
 
 function get_chapters (body) {
 	var $ = cheerio.load(body);
@@ -59,6 +58,7 @@ function get_chapters (body) {
 
 	return chapters[chapters.length - 1];
 }
+
 
 function download_image (chapter, number) {
 
@@ -81,6 +81,7 @@ function download_image (chapter, number) {
 	}
 }
 
+
 function generate_imageUrl (chapter, number) {
 	if (number < 10) {
 		number = '0' + number
@@ -88,4 +89,16 @@ function generate_imageUrl (chapter, number) {
 	return IMAGE_URL + chapter + '-' + number + '.jpg' 
 }
 
-download_chapter('800');
+
+function create_folder(chapter) {
+	var dir = 'capitulo-' + chapter;
+
+	if (!fs.existsSync(dir)){
+	    fs.mkdirSync(dir);
+	}
+	return dir + '/'
+}
+
+
+// Starts everything
+main();
