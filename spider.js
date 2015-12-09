@@ -6,6 +6,7 @@ var MAIN_URL = 'http://mangaop.info/capitulos/'
 
 var IMAGE_URL = 'http://mangas2014.centraldemangas.com.br/one_piece/one_piece'
 
+//These headers are used just when is downloading an image.
 var HEADER_ONE_PIECE = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:42.0) Gecko/20100101 \
                    Firefox/42.0',
@@ -49,6 +50,8 @@ function download_chapter (chapter) {
 
 
 function generate_mainUrl (chapter) {
+	// The URL will be: Ex for chapter 800
+	// http://mangaop.info/capitulos/800#1
 	return MAIN_URL + chapter + '#1'
 }
 
@@ -58,6 +61,7 @@ function get_chapters (body) {
 
 	var chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
 
+	// Return the last one.
 	return chapters[chapters.length - 1];
 }
 
@@ -85,6 +89,8 @@ function download_image (chapter, number) {
 
 
 function generate_imageUrl (chapter, number) {
+	// The URL will be: Ex for chapter 800 and number 1
+	// http://mangas2014.centraldemangas.com.br/one_piece/one_piece800-01.jpg
 	if (number < 10) {
 		number = '0' + number
 	}
