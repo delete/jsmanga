@@ -12,4 +12,4 @@ Pra instalar todas a dependências:
 
 Para baixar o capitulo 800:
 
-`node spider.js 800`
+`node index.js 800`
