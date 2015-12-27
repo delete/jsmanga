@@ -1,38 +1,41 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var fs = require('fs');
+'use strict'
 
-var MAIN_URL = 'http://mangaop.info/capitulos/'
+const request = require('request');
+const cheerio = require('cheerio');
+const fs = require('fs');
 
-var IMAGE_URL = 'http://mangas2014.centraldemangas.com.br/one_piece/one_piece'
+const MAIN_URL = 'http://mangaop.info/capitulos/'
+
+const IMAGE_URL = 'http://mangas2014.centraldemangas.com.br/one_piece/one_piece'
 
 //These headers are used just when is downloading an image.
-var HEADER_ONE_PIECE = {
+const HEADER_ONE_PIECE = {
    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:42.0) Gecko/20100101 \
        Firefox/42.0'
   ,'Host': 'mangas2014.centraldemangas.com.br'
   ,'Accept': 'image/png,image/*;q=0.8,*/*;q=0.5'
   ,'Accept-Language': 'pt-BR,en;q=0.5'
   ,'Referer': 'http://mangaop.info/capitulos/747'
-}
+};
 
-function main () {
-  var args = process.argv.slice(2);
+// Starts first
+(function () {
+  let args = process.argv.slice(2);
   download_chapter(args[0]);
-}
+})();
 
 
 function download_chapter (chapter) {
 
   var url = generate_mainUrl(chapter);
 
-  var options = {
+  let options = {
     url : url,
   };
 
   function callback(error, response, body) {
     if (!error) {
-      number_of_chapters = get_chapters(body);
+      let number_of_chapters = get_chapters(body);
 
       if(!number_of_chapters){ number_of_chapters = 0 }
 
@@ -56,9 +59,9 @@ function generate_mainUrl (chapter) {
 
 
 function get_chapters (body) {
-  var $ = cheerio.load(body);
+  let $ = cheerio.load(body);
 
-  var chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
+  let chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
 
   // Return the last one.
   return chapters[chapters.length - 1];
@@ -67,17 +70,17 @@ function get_chapters (body) {
 
 function download_image (chapter, number) {
 
-  var imageUrl = generate_imageUrl(chapter, number);
+  let imageUrl = generate_imageUrl(chapter, number);
 
-  var options = {
+  let options = {
      url : imageUrl
     ,headers: HEADER_ONE_PIECE
   };
 
   var filename = 'capitulo-' + number + '.jpg';
 
-  var dir = create_folder(chapter);
-  var path_to_save = dir + filename;
+  let dir = create_folder(chapter);
+  let path_to_save = dir + filename;
 
   function callback () {
     console.log('Arquivo salvo ' + filename)
@@ -105,7 +108,3 @@ function create_folder(chapter) {
   }
     return dir + '/'
 }
-
-
-// Starts everything
-main();
