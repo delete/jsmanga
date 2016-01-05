@@ -5,12 +5,12 @@ Cópia descarada e mal feita em Javascript do [Pymanga](https://github.com/mazul
 
 ## Como usar?
 
-Pra instalar todas a dependências:
+Pra instalar todas as dependências:
 
 `npm install`
 
 
-Para baixar o capitulo 800:
+Para baixar o capítulo 800:
 
 `node index.js 800`
 
