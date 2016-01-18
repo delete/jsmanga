@@ -12,7 +12,7 @@ Pra instalar todas as dependências:
 
 Para baixar o capítulo 800:
 
-`node index.js 800`
+`node index.js --chapter 800`
 
 
 # Desenvolvedor
@@ -23,4 +23,4 @@ Para rodar usando Docker, primeiro crie uma imagem do Dockerfile:
 
 Agora execute:
 
-`docker run -it -v $(pwd):/app node-app node /app/index.js 800`
+`docker run -it -v $(pwd):/app node-app node /app/index.js --chapter 800`
