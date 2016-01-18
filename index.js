@@ -3,6 +3,11 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
+let argv = require('yargs')
+  .usage('Usage: $0 --chapter [num]')
+  .demand('chapter')
+  .argv;
+
 
 const MAIN_URL = 'http://mangaop.info/capitulos/'
 
@@ -20,8 +25,7 @@ const HEADER_ONE_PIECE = {
 
 // Starts first
 (function () {
-  let args = process.argv.slice(2);
-  download_chapter(args[0]);
+  download_chapter(argv.chapter);
 })();
 
 
