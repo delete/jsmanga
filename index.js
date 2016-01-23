@@ -24,7 +24,7 @@ const HEADER_ONE_PIECE = {
 };
 
 // Starts first
-(function () {
+(() => {
   download_chapter(argv.chapter);
 })();
 
