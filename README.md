@@ -12,8 +12,9 @@ Pra instalar todas as dependências:
 
 Para baixar o capítulo 800:
 
-`node index.js --chapter 800`
+`node index.js  --manga "One Peace" --chapter 800`
 
+> Apenas "One Peace" está habilitado por enquanto.
 
 # Desenvolvedor
 
@@ -23,4 +24,4 @@ Para rodar usando Docker, primeiro crie uma imagem do Dockerfile:
 
 Agora execute:
 
-`docker run -it -v $(pwd):/app node-app node /app/index.js --chapter 800`
+`docker run -it -v $(pwd):/app node-app node /app/index.js --manga "One Peace "--chapter 800`
