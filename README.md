@@ -24,4 +24,4 @@ Para rodar usando Docker, primeiro crie uma imagem do Dockerfile:
 
 Agora execute:
 
-`docker run -it -v $(pwd):/app node-app node /app/index.js --manga "One Peace "--chapter 800`
+`docker run -it -v $(pwd):/app node-app node /app/index.js --manga "One Peace " --chapter 800`
