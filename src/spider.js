@@ -14,8 +14,7 @@ module.exports = (mangaData, chapter) => {
   
   function generate_mainUrl (chapter) {
     // The URL will be: Ex for chapter 800
-    // http://mangaop.info/capitulos/800#1
-    mangaData.url += chapter + '#1'
+    mangaData.url += chapter
   }
   
   function listAllChapters(){
@@ -40,9 +39,12 @@ module.exports = (mangaData, chapter) => {
   };
 
   function getChapters(body){
+    // TODO: Improve this function
     let $ = cheerio.load(body);
-    let chapters = $("#capPages").text().replace("\t", " ").trim().split("\t");
+    let chapters = $('.text-destaque').text().replace("\t", " ").trim().split("\t");
 
+    chapters = chapters[chapters.length - 1].split(' ');
+    
     //Return the last one
     return chapters[chapters.length - 1];
   };
@@ -56,7 +58,7 @@ module.exports = (mangaData, chapter) => {
 
     const filename = 'capitulo-' + number + '.jpg';
 
-    let dir = createFolder('capitulo-' + chapter);
+    let dir = createFolder(mangaData.name + '-' + chapter);
     let path_to_save = dir + filename;
     
     function callback(){
@@ -69,7 +71,7 @@ module.exports = (mangaData, chapter) => {
     if ( number < 10 ) {
       number = '0' + number
     }
-    return mangaData.imageUrl + chapter + '-' + number + '.jpg';
+    return mangaData.imageUrl + chapter + '/' + number + '.jpg';
   };
 
   function createFolder(path) {
