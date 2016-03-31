@@ -8,11 +8,11 @@ module.exports = (mangaData, chapter) => {
   
   //Starts everythink
   (() => {
-    generate_mainUrl(chapter);
+    generateMainUrl(chapter);
     listAllChapters();
   })();
   
-  function generate_mainUrl (chapter) {
+  function generateMainUrl (chapter) {
     // The URL will be: Ex for chapter 800
     mangaData.url += chapter
   }
@@ -31,7 +31,7 @@ module.exports = (mangaData, chapter) => {
         console.log("Número de páginas: " + number_of_chapters);
 
         for (let i = 1; i <= number_of_chapters; i++) {
-          download_image(chapter, i);
+          downloadImage(chapter, i);
         }
       }  
     }
@@ -49,8 +49,8 @@ module.exports = (mangaData, chapter) => {
     return chapters[chapters.length - 1];
   };
 
-  function download_image(chapter, number){
-    const imageUrl = generate_imageUrl(chapter, number);
+  function downloadImage(chapter, number){
+    const imageUrl = generateImageUrl(chapter, number);
     const  options = {
       url: imageUrl
      ,headers: mangaData.headers
@@ -67,7 +67,7 @@ module.exports = (mangaData, chapter) => {
     request(options).pipe(fs.createWriteStream(path_to_save)).on('close', callback);
   };
 
-  function generate_imageUrl(chapter, number){
+  function generateImageUrl(chapter, number){
     if ( number < 10 ) {
       number = '0' + number
     }
