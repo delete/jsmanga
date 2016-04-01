@@ -13,7 +13,6 @@ module.exports = (mangaData, chapter) => {
   })();
   
   function generateMainUrl (chapter) {
-    // The URL will be: Ex for chapter 800
     mangaData.url += chapter
   }
   
@@ -21,7 +20,6 @@ module.exports = (mangaData, chapter) => {
     let options = {
       url: mangaData.url,
     };
-    console.log(mangaData.url)
     function callback (error, response, body) {
       if (!error) {
         let number_of_chapters = getChapters(body);
@@ -39,7 +37,7 @@ module.exports = (mangaData, chapter) => {
   };
 
   function getChapters(body){
-    // TODO: Improve this function
+    // TODO: Improve this function, it is difficult to read.
     let $ = cheerio.load(body);
     let chapters = $('.text-destaque').text().replace("\t", " ").trim().split("\t");
 
