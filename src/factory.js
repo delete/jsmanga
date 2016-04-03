@@ -17,6 +17,6 @@ module.exports = (mangaName, chapter) => {
   } else if (name == 'dragon ball super'){
     require('./spider')(dragon_ball_super, chapter); 
   } else {
-    console.log("Nenhum manga com esse encontrado.");
+    console.log("Nenhum manga com esse nome encontrado.");
   }
 }
