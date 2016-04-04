@@ -4,7 +4,7 @@ module.exports = (mangaName, chapter) => {
   const fs = require('fs');
 
   // Modules
-  const one_piece = JSON.parse(fs.readFileSync('./src/modules/one_piece.json', 'utf8'));
+  const one_piece = JSON.parse(fs.readFileSync('./src/modules/one-piece.json', 'utf8'));
   const bleach = JSON.parse(fs.readFileSync('./src/modules/bleach.json', 'utf8'));
   const dragon_ball_super = JSON.parse(fs.readFileSync('./src/modules/dragon-ball-super.json', 'utf8'));
 
