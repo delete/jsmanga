@@ -22,7 +22,7 @@ module.exports = (mangaData, chapter) => {
     };
     function callback (error, response, body) {
       if (!error) {
-        let number_of_chapters = getChapters(body);
+        let number_of_chapters = getChaptersAndMangaNumbers(body);
 
         if(!number_of_chapters) { number_of_chapters = 0 }
 
@@ -36,12 +36,17 @@ module.exports = (mangaData, chapter) => {
     request(options, callback);
   };
 
-  function getChapters(body){
+  function getChaptersAndMangaNumbers(body){
     // TODO: Improve this function, it is difficult to read.
     let $ = cheerio.load(body);
     let chapters = $('.text-destaque').text().replace("\t", " ").trim().split("\t");
 
     chapters = chapters[chapters.length - 1].split(' ');
+
+    // Get the manga number, to create the imageUrl.
+    let mangaNumber = $('.imagemCapitulo').attr('src').split('/')[5];
+
+    mangaData.imageUrl += mangaNumber + '/';
     
     //Return the last one
     return chapters[chapters.length - 1];
