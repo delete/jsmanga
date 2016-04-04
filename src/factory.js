@@ -1,22 +1,16 @@
+'use strict';
+
 module.exports = (mangaName, chapter) => {
-  'use strict';
 
   const fs = require('fs');
 
-  // Modules
-  const one_piece = JSON.parse(fs.readFileSync('./src/modules/one-piece.json', 'utf8'));
-  const bleach = JSON.parse(fs.readFileSync('./src/modules/bleach.json', 'utf8'));
-  const dragon_ball_super = JSON.parse(fs.readFileSync('./src/modules/dragon-ball-super.json', 'utf8'));
+  const formatedName = textFormating(mangaName);
+  const mangaPath = `./src/modules/${formatedName}.json`;
+  const mangaData = JSON.parse(fs.readFileSync(mangaPath, 'utf8'));
 
-  const name = mangaName.toLowerCase();
-
-  if (name == 'one piece'){
-    require('./spider')(one_piece, chapter);
-  } else if (name == 'bleach'){
-    require('./spider')(bleach, chapter); 
-  } else if (name == 'dragon ball super'){
-    require('./spider')(dragon_ball_super, chapter); 
-  } else {
-    console.log("Nenhum manga com esse nome encontrado.");
+  require('./spider')(mangaData, chapter);
+  
+  function textFormating(string) {
+    return string.toLowerCase().split(' ').join('-');
   }
 }
