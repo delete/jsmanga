@@ -6,9 +6,15 @@ module.exports = (mangaName, chapter) => {
 
   const formatedName = textFormating(mangaName);
   const mangaPath = `./src/modules/${formatedName}.json`;
-  const mangaData = JSON.parse(fs.readFileSync(mangaPath, 'utf8'));
+  
+  try {
+    const mangaData = JSON.parse(fs.readFileSync(mangaPath, 'utf8')); 
+    require('./spider')(mangaData, chapter);
+  }
+  catch (e) {
+    console.log('Manga não encontrado.');
+  }
 
-  require('./spider')(mangaData, chapter);
   
   function textFormating(string) {
     return string.toLowerCase().split(' ').join('-');
