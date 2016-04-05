@@ -4,7 +4,7 @@ module.exports = (mangaName, chapter) => {
 
   const fs = require('fs');
 
-  const formatedName = textFormating(mangaName);
+  const formatedName = require('./textFormating')(mangaName);
   const mangaPath = `./src/modules/${formatedName}.json`;
   
   try {
@@ -13,10 +13,5 @@ module.exports = (mangaName, chapter) => {
   }
   catch (e) {
     console.log('Manga não encontrado.');
-  }
-
-  
-  function textFormating(string) {
-    return string.toLowerCase().split(' ').join('-');
   }
 }
