@@ -9,7 +9,7 @@ module.exports = (mangaName, chapter) => {
   
   try {
     const mangaData = JSON.parse(fs.readFileSync(mangaPath, 'utf8')); 
-    require('./spider')(mangaData, chapter);
+    require('./spiders/animeOnlineSpider.js')(mangaData, chapter);
   }
   catch (e) {
     console.log('Manga não encontrado.');
