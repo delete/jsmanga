@@ -1,20 +1,23 @@
 'use strict';
 
-module.exports = (mangaData, chapter) => {
+module.exports = (name, chapter) => {
 
   const request = require('request');
   const cheerio = require('cheerio');
   const fs = require('fs');
+
+  const MAIN_URL = "http://mangaonline.com.br";
   
+  let mangaData = {
+    "name": name,
+    "url": `${MAIN_URL}/capitulo.php?act=getImg&anime=${name}&capitulo=${chapter}`,
+    "imageUrl": `${MAIN_URL}/images/mangas/`
+  };
+
   //Starts everythink
   (() => {
-    generateMainUrl(chapter);
     listAllChapters();
   })();
-  
-  function generateMainUrl (chapter) {
-    mangaData.url += chapter
-  }
   
   function listAllChapters(){
     let options = {
