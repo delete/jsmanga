@@ -8,7 +8,7 @@ module.exports = (name, chapter) => {
 
   const MAIN_URL = "http://mangaonline.com.br";
   
-  let mangaData = {
+  let MANGA_DATA = {
     "name": name,
     "url": `${MAIN_URL}/capitulo.php?act=getImg&anime=${name}&capitulo=${chapter}`,
     "imageUrl": `${MAIN_URL}/images/mangas/`
@@ -21,7 +21,7 @@ module.exports = (name, chapter) => {
   
   function listAllChapters(){
     let options = {
-      url: mangaData.url,
+      url: MANGA_DATA.url,
     };
     function callback (error, response, body) {
       if (!error) {
@@ -49,7 +49,7 @@ module.exports = (name, chapter) => {
     // Get the manga number, to create the imageUrl.
     let mangaNumber = $('.imagemCapitulo').attr('src').split('/')[5];
 
-    mangaData.imageUrl += mangaNumber + '/';
+    MANGA_DATA.imageUrl += mangaNumber + '/';
     
     //Return the last one
     return chapters[chapters.length - 1];
@@ -59,12 +59,12 @@ module.exports = (name, chapter) => {
     const imageUrl = generateImageUrl(chapter, number);
     const  options = {
       url: imageUrl
-     ,headers: mangaData.headers
+     ,headers: MANGA_DATA.headers
     };
 
     const filename = 'capitulo-' + number + '.jpg';
 
-    let dir = createFolder(mangaData.name + '-' + chapter);
+    let dir = createFolder(MANGA_DATA.name + '-' + chapter);
     let path_to_save = dir + filename;
     
     function callback(){
@@ -77,7 +77,7 @@ module.exports = (name, chapter) => {
     if ( number < 10 ) {
       number = '0' + number
     }
-    return mangaData.imageUrl + chapter + '/' + number + '.jpg';
+    return MANGA_DATA.imageUrl + chapter + '/' + number + '.jpg';
   };
 
   function createFolder(path) {
