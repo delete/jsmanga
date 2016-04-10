@@ -64,7 +64,7 @@ module.exports = (name, chapter) => {
 
     const filename = 'capitulo-' + number + '.jpg';
 
-    let dir = createFolder(MANGA_DATA.name + '-' + chapter);
+    let dir = require('./createFolder.js')(MANGA_DATA.name + '-' + chapter);
     let path_to_save = dir + filename;
     
     function callback(){
@@ -79,11 +79,4 @@ module.exports = (name, chapter) => {
     }
     return MANGA_DATA.imageUrl + chapter + '/' + number + '.jpg';
   };
-
-  function createFolder(path) {
-    if (!fs.existsSync(path)){
-      fs.mkdirSync(path);
-    }
-    return path + '/'
-  }
 };
