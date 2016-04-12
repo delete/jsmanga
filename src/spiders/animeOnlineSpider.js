@@ -27,7 +27,10 @@ module.exports = (name, chapter) => {
       if (!error) {
         let number_of_chapters = getChaptersAndMangaNumbers(body);
 
-        if(!number_of_chapters) { number_of_chapters = 0 }
+        if(number_of_chapters == 0) {
+          console.log("Manga não encontrado!");
+          return
+        }
 
         console.log("Número de páginas: " + number_of_chapters);
 
